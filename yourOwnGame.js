@@ -206,7 +206,7 @@ gameBoard[3][5].color = 'black';
 
 // 2. Create an array of the playerNames. For example: ['hermoineGranger', 'graceHopper']
 
-// 3. Now use two (nested) each loops to add these pieces to the board. 
+// 3. Now use two (nested) each loops to add these pieces to the board. Remember that we have the makePiece function! 
   // Question1: How can you make sure each piece ends up on a different square on the board? 
   // Question2: What happens when you get to the end of a line? How do you know to start on the first position of the next line? Think if you can use the modulus "%" operator for this. If you're not familiar with the modulus operator, it gives you the remainder from dividing two numbers. So if we divide 12 by 8, that gives us a remainder of 4 (we have 4 left over after taking 8 out of 12). As always, feel free to google around for more information!
   // Question3: How can we line these pieces up on opposite sides of the board?
@@ -229,7 +229,7 @@ gameBoard[3][5].color = 'black';
 //   scaredKitty: 4,
 //   hobblingPirate:8,
 //   groupHuggers:12 }
-  // You should be able to do this by just using reduce inside of another reduce if you're feeling ambitious!
+  // You should be able to do this from scratch by just using reduce inside of another reduce if you're feeling ambitious!
 
 // 7. When a user clicks on a square, the app will invoke a function on the global scope called 'clickHandler'. 
   // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
@@ -245,13 +245,16 @@ gameBoard[3][5].color = 'black';
   // Write some logic inside of clickHandler that highlights all the squares in the row that has been clicked on by turning them pink. 
   // Now expand this to include all the squares in the same column as the square that was clicked on. So if the user clicks on a square in row 3, column 4, all squares in row 3 and all squares in column 4 should become pink. 
 
-// 8. Now let's go through and create a function to undo highlightPieces so the board is colored according to it's default, alternating colors. There are several different approaches that will work well here. Choose whichever one you want (but do keep practicing functional programming- that will be incredibly valuable, particularly if it's still a bit painful for you). Just keep in mind that the end goal is to return the board to a "normal" looking state where the color of the pieces alternates as it originally did, with the gamePieces still being displayed on the relevant squares. 
+// 8. Now let's go through and create a function to undo highlightPieces so the board returns to it's default pattern of alternating colors. There are several different approaches that will work well here. Choose whichever one you want (but do keep practicing functional programming- that will be incredibly valuable, particularly if it's still a bit painful for you). Just keep in mind that the end goal is to return the board to a "normal" looking state where the color of the pieces alternates as it originally did, with the gamePieces still being displayed on the relevant squares. 
 
-// 9. Now let's abstract out this logic and put it into a function on each of our gamePieces. 
-  // Create a function on each gamePiece called highlightSquares. Remove that functionality from our clickHandler function and put it into the highlightSquares function on each object. 
+// 9. Now let's abstract out the logic of highlighting the squares in the same row and column and put it into a function on each of our gamePieces. 
+  // Our end goal here is to allow each gamePiece type to have it's own highlightSquares pattern. So some gamePiece types might move diagonally, some might move horizontally, some might jump randomly, etc. 
+  // To do this, we'll have to make highlightSquares a method on each gamePiece so we can customize it to that gamePiece type. 
+  // Create a function on each gamePiece called highlightSquares. 
+  // Remove the highlightSquares from being hardcoded into our clickHandler function and put it into the highlightSquares method on each object. 
   // Now, inside clickHandler, let's see if there is a gamePiece on the square that was clicked on. If there is, invoke highlightSquares as a method on that object. 
 
-// 10. Now that highlightSquares is a method on each gamePiece object, we can change what each gamePiece's movement pattern is. Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
+// 10. Now that highlightSquares is a method on each gamePiece object, we can change what each gamePiece's movement pattern is! Go through and change the logic of which squares on the board are highlighted for each different type of piece. For our scaredKitten example, whose movement description is "Runs to a corner and hides", we would highlight only the four corner squares. 
   // Each gamePiece of the same type should have the same highlightSquares functionality. 
   // See if you can highlight all the diagonal squares from a piece. 
     // HINT: This is going to sound obvious, but what math do you have to do to move from square [0,0] to it's lower-right diagonal of [1,1]? 
@@ -261,7 +264,7 @@ gameBoard[3][5].color = 'black';
       // 3. down and to the left
       // 4. up and to the left
       // Each one will have it's own logic and will likely have to be built out separately. Don't feel bad about this! Start by making just one of those four work. 
-        // This is a super valuable pattern called MVP, or "Minimum Viable Product". All it means is get the tiniest possible version of something working first, then work on expanding it out to a full feature set. In this case, make one diagonal work first, then worry about the other three. 
+        // This is a super valuable pattern called MVP, or "Minimum Viable Product". All it means is get the tiniest possible version of something working first, then work on expanding it out to a full feature set. In this case, make one diagonal work first, then worry about the other three afterwards. 
 
 // 11. Now we're highlighting specific squares that represent where each piece can move to. Let's build out some logic, starting in our clickHandler, that lets us highlight squares on the board when a piece is clicked, and then un-highlight the board (return it to it's default state) when that same piece is clicked again. There are many different ways of accmplishing this too- we're going to challenge you to figure out which path you want to take!
 
@@ -271,9 +274,9 @@ gameBoard[3][5].color = 'black';
   // This should tell the user that there is a potential collision on that square, if the piece were to move there. 
 
 // 13. Now let's build out the ability to make each piece move on the board! 
-  // While a piece is clicked (i.e., the squares it can move to on the board are highlighted), if one of those squares is clicked on, move the piece there! 
+  // While a piece is clicked (i.e., while the squares it can move to on the board are highlighted), if one of those squares is clicked on, move the piece there! 
   // For now, let's assume our user is being nice to us and will only try to move the gamePiece to a square that is eligible to be moved to. 
-  // When this happens, there are two things we need to do:
+  // When this happens, there are a few things we need to do:
     // 1. Add the piece to it's new location
     // 2. Remove the piece from it's current location
     // 3. Remove highlighting from the board
@@ -282,7 +285,7 @@ gameBoard[3][5].color = 'black';
 // 14. Great! Now we can click on a piece and then click on another square to move it there. That's pretty cool. But we've been assuming that our user would be nice to us by only trying to move a piece to where it's allowed to move. What if we wanted to allow not-so-nice people to play our game too? Let's add in a logic check here. Make sure the square the user clicks on to try to move a piece to is a square that piece can actually move to. 
   // How can we accomplish this? Well we've already highlighted the eligible squares on the board with a certain color, right? Let's use that to our advantage!
   // If the user-selected square isn't eligible, pop up an alert for the user telling them to either:
-    // A. Choose a different square that is highlighted to move the piece to
+    // A. Choose a different square that is highlighted in pink to move the piece to
     // B. Click on the same original square again to de-select that piece. 
 
 /*
