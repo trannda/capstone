@@ -1,6 +1,7 @@
 // Welcome to the final project for Telegraph Prep! Here we'll be pulling together everything we've learned so far in the course.
 
-// The $(document).ready(function() {}) just says "Wait to run the code inside here until after everything we need on the page has loaded."
+// The $(document).ready(function() {}) just says "Wait to run the code inside here until after everything we need on the page has loaded." We need this to make sure that we've gotten the underscore library back from the Internet before running our code.
+// Since it nests everything inside of another function, it creates a local scope! This means that you will need to write console.logs in this file to see them show up in your console, rather than interrogating your console directly. Writing all your console.logs in your .js file here is a good pattern to get used to. 
 
 $(document).ready(function() {
 // NOTE: it is an explicit goal of this project to get you familiar with functional programming. Functional programming is a whole new way of thinking that requires some practice and experience to feel natural. These prompts are designed to give you experience using functional programming, so go through them as they're written, even if you can think of other ways of doing them without using functional programming. 
@@ -14,13 +15,6 @@ var gameBoard = makeGameBoard(8);
 
 // When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
 console.log('our gameBoard is: ', gameBoard);
-// One of the things you'll need to be great at as an engineer is debugging. Debugging is nothing more than problem solving, or having fun with a puzzle. 
-// As you work through this project, you will get stuck on things. That's totally normal and expected! Getting your code to work when it isn't is called debugging. When you get stuck, follow the debugging pattern we outline below. 
-  // Debugging pattern:
-    // 1. Verify all of your assumptions by logging them to the console with clear comments on what each log is
-    // 2. Find the last point in your code where things are doing what you expect them to/ the first point in your code where they're not doing what you expect.
-    // 3. Iterate rapidly. Try new things (and console.log them!) until you get to a solution that works. Pay attention to each new result along the way (even if it's not what you expect it to be) to see what new information you can learn from it.
-    // 4. High five someone nearby when you figure it out!
 
 // We've included the underscore.js library on the page, so feel free to use it throughout this project. 
 
@@ -32,7 +26,7 @@ console.log('our gameBoard is: ', gameBoard);
 // What you'll see is 8 different objects logged to your console. Click into them to explore them more. 
 // Each of these objects represents a square. We have many different pieces of information we want to store about each square: what color it is, what position it is on the board, what gamePiece is at that position, etc. An object is a perfect way to store information about all these different properties associated with that square. 
 
-// gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at index 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the thing at the 6th index (which is going to be a squareObj). 
+// gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at index 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the item at the 6th index (which is going to be a squareObj). 
 // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
 gameBoard[3][5].color = 'black';
 
@@ -84,7 +78,15 @@ gameBoard[3][5].color = 'black';
     // Awesome! Hopefully at this point you've fully grasped that each is just another way of executing some code on each item in a collection. And that you can make that code do whatever you want it to. 
       // Let's replace our inner each loop with map, changing the colors of all the squares to purple this time. 
 
-// Fantastico! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
+// One of the things you'll need to be great at as an engineer is debugging. Debugging is nothing more than problem solving, or having fun with a puzzle. 
+// As you work through this project, you will get stuck on things. That's totally normal and expected! Getting your code to work when it isn't is called debugging. When you get stuck, follow the debugging pattern we outline below. 
+  // Debugging pattern:
+    // 1. Verify all of your assumptions by logging them to the console with clear comments on what each log is. For example: console.log('squareObj inside _.each callback', squareObj);
+    // 2. Find the last point in your code where things are doing what you expect them to/ the first point in your code where they're not doing what you expect.
+    // 3. Iterate rapidly. Try new things (and console.log them!) until you get to a solution that works. Pay attention to each new result along the way (even if it's not what you expect it to be) to see what new information you can learn from it.
+    // 4. High five someone nearby when you figure it out!
+
+// Now that we have a decent understanding of the gameBoard. Now let's test out the makePiece function. 
   // Let's add a new piece (name it anything you want. babyDino is my current favorite, but I'm sure you'll have fun coming up with your own favorite gamePieces!). Try invoking makePiece with the right arguments and make sure it worked by opening up your browser. Uncomment the following lines to make this work. 
   // makePiece(gameBoard, [3,5], 'babyDino');
   // gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
