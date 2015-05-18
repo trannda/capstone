@@ -14,7 +14,7 @@ $(document).ready(function() {
 var gameBoard = makeGameBoard(8);
 
 // When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
-console.log('our gameBoard is: ', gameBoard);
+console.log('our gameBoard is:', gameBoard);
 
 // We've included the underscore.js library on the page, so feel free to use it throughout this project. 
 
@@ -32,9 +32,12 @@ gameBoard[3][5].color = 'black';
 
 // Alright! Now that we've figured out the gameBoard is an array of arrays, and that each square is just an object with some useful properties on it, let's start using our functional programming tools to make some changes to the board. 
 // Use each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
+  // console.log each item that's passed into our callback. 
+  // What is it that's being passed into each invocation of our callback? Can we name this parameter something obvious that makes it clear what it represents?
   // Let's change every square to a different color of your choosing. 
 
     // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'.
+      // Random aside: hex values are really useful if you're trying to create random colors :)
   // Now let's do the same thing using map on the second row of our gameBoard.
     // First, create an array of 8 color strings. Mine would be ['orange','purple','orange','purple','orange','purple','orange','purple']
     // What's the key difference between map and each? map returns an array, whereas each only has side effects, and does not return anything. 
@@ -61,9 +64,11 @@ gameBoard[3][5].color = 'black';
         // Remember, the key difference between map and each is that each purely has side effects, while map is designed to return a new array that is the same length as the old array. In order to use map properly, we must put this returned array to use. 
 
   // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of another each to change all of the rows!
-    // Let's warm up to this by doing it the way we would before we knew how to program functionally: using nested for loops. 
-      // Use an outer for loop to iterate through all of the rows in the gameBoard. 
-      // Use an inner for loop to iterate through all the objects in a given row. 
+    // Let's warm up to this by doing it the way we would have before we knew how to program functionally: using nested for loops. 
+      // Use an outer for loop to iterate through the entire gameBoard.
+        // Each iteration will access one of the rows in the gameBoard. 
+      // Use an inner for loop to iterate through a row. 
+        // Each iteration will access one of the squareObjs in that row. 
         // While iterating through each object, change it's color property to 'orange' (or any other color of your choosing).
 
     // Great! Now that we've changed the color of each square to orange using for loops, let's transition this over to functional programming.
@@ -77,6 +82,7 @@ gameBoard[3][5].color = 'black';
 
     // Awesome! Hopefully at this point you've fully grasped that each is just another way of executing some code on each item in a collection. And that you can make that code do whatever you want it to. 
       // Let's replace our inner each loop with map, changing the colors of all the squares to purple this time. 
+      // Remember that to do this, you'll have to first create an array that is just filled with the word purple 8 times. 
 
 // One of the things you'll need to be great at as an engineer is debugging. Debugging is nothing more than problem solving, or having fun with a puzzle. 
 // As you work through this project, you will get stuck on things. That's totally normal and expected! Getting your code to work when it isn't is called debugging. When you get stuck, follow the debugging pattern we outline below. 
@@ -91,36 +97,45 @@ gameBoard[3][5].color = 'black';
   // makePiece(gameBoard, [3,5], 'babyDino');
   // gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
 
-  // Now that we've added a piece to the board, let's use that piece to practice filter. If you're not familiar with filter, look it up in the docs! 
-  // Invoke filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember where we're storing gamePiece on each squareObj? 
+  // Now that we've added a piece to the board, let's use that piece to practice filter. If you're not familiar with filter, look it up in the underscorejs docs! 
+  // Invoke _.filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember the property name where we're storing gamePiece on each squareObj? 
 
-  // Now try adding gamePieces to a couple of different rows throughout the board. 
+  // Now try adding gamePieces to a couple of different rows throughout the board using this makePiece funcion. 
 
   // Can you use each, in conjunction with filter, to find all the squares on the whole board that have a piece on them? 
     // Hint: Remember that each can't return anything, but it can have side effects (that is, modify variables it has scope access to).
+    // Look through the example output below. At this point, we're ok having empty arrays for the rows where we have no gamePieces. 
 
   // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. 
     // That should look something like: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two gamePieces on row 5.
 
+// Before we move onto the next section, consider commenting out any console.logs you have so far. This will make your console easier to read, and your code look more professional. 
+
 // We're now going to go on a mini-sprint covering reduce, the last critical functional programming tool. Understanding reduce will let us take this messy nested array we have, and turn it into a single, flattened array. 
 
 //Reduce mini-sprint:
-// You'll notice that oftentimes what you're doing with for loops and each statements is reducing an entire collection down to a single answer. This is such a common pattern that there's a canonical functional programming function called reduce. Let's explore what reduce does, and how it boils a collection down to a single answer!
-// What reduce does is iterate over a collection, and invoke a callback function on each item in that collection. 
-  // That callback function takes two parameters: the result from the previous iteration, and the current item.
-  // That callback returns a single item, given these two inputs. 
+// You'll notice that oftentimes what you're doing with for loops and each statements is reducing an entire collection down to a single answer. This is such a common pattern that there's a canonical functional programming tool called reduce. Let's explore what reduce does, and how it boils a collection down to a single answer!
+// What reduce does is:
+  // 1. Iterate over a collection, and invoke a callback function on each item in that collection. 
+  // 2. The callback function takes two parameters: the accumulated result from the previous iteration, and the current item.
+  // 3. The callback performs some logic, and 
+  // 4. The callback returns a single item, given these two inputs. 
+  // 5. The result returned from the previous iteration is now passed in as the accumulated result to the next iteration. 
+  // 6. reduce returns the final accumulated value for us. 
   // An obvious way of using reduce is to sum up the values in an array. That would look like so:
   var testArr = [6,7,8,9,10];
-  var sum = _.reduce(testArr, function(previous, current) {
-    return previous + current;
+  var sum = _.reduce(testArr, function(accumulated, current) {
+    return accumulated + current;
   });
   // console.log('the sum returned from reduce is:',sum);
   // Let's break this down for a moment. 
   // We're creating a variable sum, and setting it equal to the result of invoking reduce with some arguments. 
     // Those areguments are the testArr we just created, and a callback function. 
-      // The callback function takes in two parameters: the result from the previous invocation of the callback function, and the current value being iterated over. 
+      // The callback function takes in two parameters: the accumulated result from the previous invocation of the callback function, and the current value being iterated over. 
       // The callback then performs some logic on these two things and returns a single thing. 
       // In our case, the callback function adds these two things together and returns the result of that addition. 
+      // This result is then passed in as accumulated to our next invocation of the callback. 
+      // At the end, reduce returns the accumulated value for us. 
   // Write out your own invocation of reduce that gives you the results of multiplying all the values in testArr together. 
   // Reduce also works on the values stored in an object. 
   var codingPoints = {
@@ -131,25 +146,29 @@ gameBoard[3][5].color = 'black';
   };
   // Let's use reduce to add together all the values in our codingPoints object. 
   // reduce also takes an optional starting value that we haven't been giving it yet. 
-    // What is this starting value used for? It's the value that is passed in as "previous" on the first iteration. 
+    // What is this starting value used for? It's the value that is passed in as "accumulated" on the first iteration. 
     // Let's say that you already came in with 10 codingPoints before starting on coderByte or codeCademy. We can pass that in as the starting value to reduce. All you need to do is put it after a comma after the callback function, like so: 
-    _.reduce(codingPoints, function(previous, current) {
+    _.reduce(codingPoints, function(accumulated, current) {
       //logic goes here
-      return;
     }, 10);
     // Try writing a new invocation of reduce that gives yourself 50 starting codingPoints and then sums up the rest of the codingPoints. 
     // Now try writing another invocation of reduce that multiplies the values in testArr together, but starts with the value of 10. 
       // What do you expect to happen?
       // Hint: think through what happens on the first iteration through reduce. 
-        // Let's step through it: 10 will be passed in as the value for previous, and 6 will be passed in as the value for current. We'll multiply them together, and return the result, 60. 
-        // 60 will then be passed in as the value for previous on the next iteratoin, and 7 will be passed in as the value for current. Multiply them together, we get 420, and return that value. 
+        // Let's step through it: 10 will be passed in as the value for accumulated, and 6 will be passed in as the value for current. We'll multiply them together, and return the result, 60. 
+        // 60 will then be passed in as the value for accumulated on the next iteratoin, and 7 will be passed in as the value for current. Multiply them together, we get 420, and return that value. 
         // We repeat this through the last item in the array, eventually getting to an answer that is 10x the value we got when we did not pass in 10 as the starting value. 
-  // Reduce is super flexible. You can use it like filter if you wanted to. Let's write out code that reduces the codingPoints object down to just an array of values that are larger than 1000. So we'd expect to get the following: [1200, 8000000]
-    // HINT: you can pass in anything you want as a starting value, even an empty array. 
-  // Now let's think through how we could use reduce to turn an array of nested arrays into a flattened array. 
+  // Reduce is super flexible. You can use it like filter if you wanted to. 
+  // Let's write out code that reduces the codingPoints object down to just an array of values that are larger than 1000. So we'd expect to get the following: [1200, 8000000]
+    // HINT: you can pass in anything you want as a starting value, even an empty array.
+
+  // Now let's think through how we could use reduce to turn an array of nested arrays into a single array. 
     var nestedArrs = [[1,2,3],[4],[5,6,7,8],[9,10]];
     // We can use reduce to simplify that down to a single value of [1,2,3,4,5,6,7,8,9,10].
     // As always, when in doubt, log the variables you're working with to the console with a clear note. 
+    // Write out the code to take each value from a nested array and push it into an accumulated array. 
+      // When in doubt, pseudocode!
+    // Make sure you're using reduce for this!
 
   // Another interesting use of reduce is with booleans. 
     var friends = {
@@ -160,9 +179,10 @@ gameBoard[3][5].color = 'black';
     // Say you have a collection of people, and a true or false value marking whether you're friends with them or not. Maybe you want to iterate through the whole collection and see if you're friends with everyone. We can use reduce for that!
       // Let's think about this for a moment. On each iteration, we want to check two things: 
         // 1. Whether we're friends with the current person (current value)
-        // 2. Whether we're friends with everyone who came before (previous value)
-      _.reduce(friends, function(previous, current) {
-        return previous && current; //return true ONLY IF both the current value is true, and the result of all previous iterations is true too. return false if either the current or the previous is false. 
+        // 2. AND whether we're friends with everyone who came before (accumulated value)
+      _.reduce(friends, function(accumulated, current) {
+        // This will return true ONLY IF both the current value is true, and the result of all accumulated iterations is true too. This will return false if either the current or the accumulated is false. 
+        return accumulated && current; 
       }, true); //start with true. What happens if we start with false? 
     // Now let's put this to use another way. 
       var bouncersNightmare= {ashley: 22, bobby:23, camila:25, gabriela:22, ben:21, miranda:24, jayden:22, sofia:23, matias:21, hannah:21, makayla:23, justin:22, isaiah:25, caleb:22, chloe:24};
@@ -172,9 +192,9 @@ gameBoard[3][5].color = 'black';
   // Awesome job! You've now covered several different uses of reduce. There's a bit of a running joke amongst programmers that any problem can be solved using reduce. With these tools in your belt, you're going to be well-suited to do just that! 
 
 
- // Let's return to our gameBoard now. Step back up to just before we went on the reduce mini-sprint to remind yourself what we were doing. 
- // Remember that we'd just used each and filter to find all the gamePieces on the board: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two game pieces on row 5.
- // Having that information scattered throughout a bunch of different arrays seems messy. You can probably think of plenty of cases where we'd want to have all that information collected into a single array. 
+// Let's return to our gameBoard now. Step back up to just before we started the reduce mini-sprint to remind yourself what we were doing. 
+// Remember that we'd just used each and filter to find all the gamePieces on the board: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two game pieces on row 5.
+// Having that information scattered throughout a bunch of different arrays seems messy. You can probably think of plenty of cases where we'd want to have all that information collected into a single array. 
   // Wait, that's starting to sound like reduce! We're taking a collection of a bunch of things, and reducing it down to a single thing. 
     // Can you think of a way we could reduce an array filled with arrays to a single array just filled with all the values contained in each subarray? 
     // Hint: what if we tried passing in an empty array as the starting value?
