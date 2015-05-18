@@ -20,8 +20,7 @@ var makeGameBoard = function(boardSize) {
         position: [i, j],
         color: color,
         gamePiece: '', // This is the property that will contain our gamePiece object if one is on that square. 
-        text: '',
-        imageURL: ''
+        text: ''
       };
       row.push(square);
     }
@@ -66,10 +65,10 @@ var renderGameBoard = function(gameBoard) {
   });
 
   // NOTE: we attach the event listeners AFTER we have attached the elements to the DOM. You will definitely get tripped up by this at some point in your career :)
-  $(document).on('click', '.gameSquare', function() {
-    console.log($(this));
-    clickHandler($(this).data('position'));
-  });
+  // NOTE: You have to uncomment these lines to make program invoke the clickHandler function you're building out in yourOwnGame.js. 
+  // $(document).on('click', '.gameSquare', function() {
+  //   clickHandler($(this).data('position'));
+  // });
 }
 
 //here we're going to keep track of the count of all pieces added to our gameBoard. 
