@@ -42,11 +42,31 @@ gameBoard[3][5].color = 'black';
 
     // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'.
   // Now let's do the same thing using map on the second row of our gameBoard.
-
+    // First, create an array of 8 color strings. Mine would be ['orange','purple','orange','purple','orange','purple','orange','purple']
     // What's the key difference between map and each? map returns an array, whereas each only has side effects, and does not return anything. 
     // Think through how we'd use each and map in different ways to accomplish the same goal. 
-    // The key part here is how to leverage what either of them does (side effects, vs. a returned array). 
-  // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of each to change all of the rows!
+    // The key part here is how to leverage the fact that map returns an array of values to you. So what we're going to do in the end is overwrite the second row of the gameBoard with the mutated array map returns to us. 
+    // Let's pseudocode!
+      // map through an array of colors
+      // remember that the callback function has to do three three things:
+        // 1. Take in an item.
+        // 2. Do something to change that item into what we want to see in the output array.
+        // 3. Return the changed item. 
+      // On each iteration of map
+        // Take in a color
+        // Change that color into a squareObj
+          // Recall that each squareObj on our board looks like this: 
+            // var square = {
+            //     position: [row, column],
+            //     color: colorToBeDisplayed,
+            //     gamePiece: '', // This is the property that will contain our gamePiece object if one is on that square. 
+            //     text: ''
+            // };
+        // Return the squareObj
+        // Set the second row of our gameBoard equal to what map returns to us. 
+        // Remember, the key difference between map and each is that each purely has side effects, while map is designed to return a new array that is the same length as the old array. In order to use map properly, we must put this returned array to use. 
+
+  // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of another each to change all of the rows!
     // Let's warm up to this by doing it the way we would before we knew how to program functionally: using nested for loops. 
       // Use an outer for loop to iterate through all of the rows in the gameBoard. 
       // Use an inner for loop to iterate through all the objects in a given row. 
@@ -57,21 +77,19 @@ gameBoard[3][5].color = 'black';
 
       // Now that all the squares are changed to blue, let's replace the outer for loop with an each statement. Again, write a whole new one from scratch here. 
         // Change the color in the inner each statement to green, just to make sure everything's working. 
-        // Remember, when in doubt, console.log the item you're working with to make sure you understand what's going on at each step!
+        // Remember, when in doubt, console.log the item you're working with to make sure you understand what it is at each step! 
+          // This is a really useful pattern to get used to. As you work with more and more complex codebases at various jobs, you won't be able to just look at the code and know exactly what you're working with; you'll have to log the results to see what the variables represent. 
         // This is where naming your variables something descriptive makes a ton of sense. What is the thing that is being passed into the callback function on either each statement? Could you name it something that reflects exactly what's being passed in?
 
     // Awesome! Hopefully at this point you've fully grasped that each is just another way of executing some code on each item in a collection. And that you can make that code do whatever you want it to. 
       // Let's replace our inner each loop with map, changing the colors of all the squares to purple this time. 
 
-
-
-
-// Awesome! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
+// Fantastico! Now we've got a decent understanding of the gameBoard. Now let's test out the makePiece function. 
   // Let's add a new piece (name it anything you want. babyDino is my current favorite, but I'm sure you'll have fun coming up with your own favorite gamePieces!). Try invoking makePiece with the right arguments and make sure it worked by opening up your browser. Uncomment the following lines to make this work. 
   // makePiece(gameBoard, [3,5], 'babyDino');
   // gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
 
-  // Now that we've added a piece to the board, let's use that piece to practice filter. 
+  // Now that we've added a piece to the board, let's use that piece to practice filter. If you're not familiar with filter, look it up in the docs! 
   // Invoke filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember where we're storing gamePiece on each squareObj? 
 
   // Now try adding gamePieces to a couple of different rows throughout the board. 
@@ -193,11 +211,14 @@ gameBoard[3][5].color = 'black';
 
 // 7. When a user clicks on a square, the app will invoke a function on the global scope called 'clickHandler'. 
   // This funnction will be invoked with the indices of the square clicked on. For example, if the user clicked on the square in the top-left corner of the board, the clickHandler will be invoked like so: clickHandler([0,0]);
+  // TODO: Uncomment lines 70-72 in helperFunctions.js. The program will now try to invoke a clickHandler function every time the user clicks on a square on the board. 
   // TODO: Uncomment the lines below and see what happens when you click on a square on the board!
     // window.clickHandler = function(positionArr) {
     //   var row = positionArr[0];
     //   var column = positionArr[1];
-    //   console.log(gameBoard[row][column]);
+    //   console.log('the user clicked on square:', gameBoard[row][column]);
+    //   // IMPORTANT: make sure that renderGameBoard(gameBoard) always comes at the end of your clickHandler function. 
+    //   renderGameBoard(gameBoard);
     // };
   // Write some logic inside of clickHandler that highlights all the squares in the row that has been clicked on by turning them pink. 
   // Now expand this to include all the squares in the same column as the square that was clicked on. So if the user clicks on a square in row 3, column 4, all squares in row 3 and all squares in column 4 should become pink. 
