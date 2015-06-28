@@ -130,7 +130,7 @@ gameBoard[3][5].color = 'black';
   // console.log('the sum returned from reduce is:',sum);
   // Let's break this down for a moment. 
   // We're creating a variable sum, and setting it equal to the result of invoking reduce with some arguments. 
-    // Those areguments are the testArr we just created, and a callback function. 
+    // Those arguments are the testArr we just created, and a callback function. 
       // The callback function takes in two parameters: the accumulated result from the previous invocation of the callback function, and the current value being iterated over. 
       // The callback then performs some logic on these two things and returns a single thing. 
       // In our case, the callback function adds these two things together and returns the result of that addition. 
@@ -156,7 +156,7 @@ gameBoard[3][5].color = 'black';
       // What do you expect to happen?
       // Hint: think through what happens on the first iteration through reduce. 
         // Let's step through it: 10 will be passed in as the value for accumulated, and 6 will be passed in as the value for current. We'll multiply them together, and return the result, 60. 
-        // 60 will then be passed in as the value for accumulated on the next iteratoin, and 7 will be passed in as the value for current. Multiply them together, we get 420, and return that value. 
+        // 60 will then be passed in as the value for accumulated on the next iteration, and 7 will be passed in as the value for current. Multiply them together, we get 420, and return that value. 
         // We repeat this through the last item in the array, eventually getting to an answer that is 10x the value we got when we did not pass in 10 as the starting value. 
   // Reduce is super flexible. You can use it like filter if you wanted to. 
   // Let's write out code that reduces the codingPoints object down to just an array of values that are larger than 1000. So we'd expect to get the following: [1200, 8000000]
@@ -175,7 +175,7 @@ gameBoard[3][5].color = 'black';
       rihanna: true,
       taylorSwift: true,
       katyPerry: false
-    }
+    };
     // Say you have a collection of people, and a true or false value marking whether you're friends with them or not. Maybe you want to iterate through the whole collection and see if you're friends with everyone. We can use reduce for that!
       // Let's think about this for a moment. On each iteration, we want to check two things: 
         // 1. Whether we're friends with the current person (current value)
