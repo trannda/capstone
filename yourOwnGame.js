@@ -102,12 +102,12 @@ gameBoard[3][5].color = 'black';
 
   // Now try adding gamePieces to a couple of different rows throughout the board using this makePiece funcion. 
 
-  // Can you use each, in conjunction with filter, to find all the squares on the whole board that have a piece on them? 
-    // Hint: Remember that each can't return anything, but it can have side effects (that is, modify variables it has scope access to).
-    // Look through the example output below. At this point, we're ok having empty arrays for the rows where we have no gamePieces. 
-
-  // Great! At this point, we should have an array that is filled with nested arrays. Each object in those nested arrays should be a square that has a gamePiece on it. 
-    // That should look something like: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two gamePieces on row 5.
+  // Go ahead and find all the pieces on the whole board, organized by row.
+  // The output should be an array that is filled with nested arrays, one for each row. Each object in those nested row arrays should be a square that has a gamePiece on it. 
+    // example output: "results after filter: [Array[0], Array[0], Array[0], Array[3], Array[0], Array[2], Array[0], Array[0]]" for a gameBoard that has three gamePieces on row 3 and two gamePieces on row 5. 
+  // Think about whether you might want to use each or map. Discuss with your pair why you might want to choose one over the other. 
+    // Hint: Remember that each can't return anything, but it can have side effects (that is, modify variables it has scope access to). On the other hand, map DOES return something... what does it return?
+    // Bonus: Write two implementations! One using each and one using map. Be sure to label the output "results after filter using each" & "results after filter using map"
 
 // Before we move onto the next section, consider commenting out any console.logs you have so far. This will make your console easier to read, and your code look more professional. 
 
