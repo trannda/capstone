@@ -148,10 +148,11 @@ gameBoard[3][5].color = 'black';
   // reduce also takes an optional starting value that we haven't been giving it yet. 
     // What is this starting value used for? It's the value that is passed in as "accumulated" on the first iteration. 
     // Let's say that you already came in with 10 codingPoints before starting on coderByte or codeCademy. We can pass that in as the starting value to reduce. All you need to do is put it after a comma after the callback function, like so: 
-    _.reduce(codingPoints, function(accumulated, current) {
+    var pointTotal = _.reduce(codingPoints, function(accumulated, current) {
       //logic goes here
     }, 10);
     // Try writing a new invocation of reduce that gives yourself 50 starting codingPoints and then sums up the rest of the codingPoints. 
+    // Remember that reduce returns a value. Feel free to store it in a variable if you like.
     // Now try writing another invocation of reduce that multiplies the values in testArr together, but starts with the value of 10. 
       // What do you expect to happen?
       // Hint: think through what happens on the first iteration through reduce. 
