@@ -15,6 +15,8 @@
   // The only thing we want on our global scope is our gameBoard object. We need to make gameBoard a global variable so that all the JavaScript files in our program can access it. Let's explicitly put it on the window object.
   window.gameBoard = makeGameBoard(8);
 
+  // You might be wondering where the makeGameBoard function came from and why we can just invoke it even though we haven't seen it declared in this file... this function was defined in the helperFunctions.js file and it was declared in the global scope, so it's accessible anywhere in our JavaScript code.
+
   // When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
   console.log('our gameBoard is:', gameBoard);
 
@@ -98,6 +100,8 @@
     // Let's add a new piece (name it anything you want. babyDino is my current favorite, but I'm sure you'll have fun coming up with your own favorite gamePieces!). Try invoking makePiece with the right arguments and make sure it worked by opening up your browser. Uncomment the following lines to make this work. 
     // makePiece(gameBoard, [3,5], 'babyDino');
     // gameBoard[3][5].gamePiece.imageURL = "http://cs307103.vk.me/v307103801/4aad/kGuRYIMoJnw.jpg";
+
+    // If you're wondering where this makePiece function came from, it was defined in the helperFunctions.js file and it was declared in the global scope, so it's accessible anywhere in our JavaScript code.
 
     // Now that we've added a piece to the board, let's use that piece to practice filter. If you're not familiar with filter, look it up in the underscorejs docs! 
     // Invoke _.filter on the row that you just added the gamePiece to. See if you can use it to return an array of only the square(s) that have a gamePiece on them. Do you remember the property name where we're storing gamePiece on each squareObj? 
