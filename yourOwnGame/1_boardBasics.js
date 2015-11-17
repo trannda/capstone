@@ -12,13 +12,13 @@
   // Notice that we wrap all of our code in an IIFE (immediately invoked function expression). This is a common pattern that you'll see... can you guess why? If you need some help, try googling "avoid polluting global scope". 
   // Since all of our code will be written inside the local scope of a function, you won't be able to just type a variable name directly in the console and see its value (remember, the console only has access to global scope variables). So, in order to see the values of the variables you declare you'll need to make use of console.log to print them to the console. Writing all your console.logs in your .js file here is a good pattern to get used to. 
   
-  // The only thing we want on our global scope is our gameBoard object. We need to make gameBoard a global variable so that all the JavaScript files in our program can access it. Let's explicitly put it on the window object.
+  /// The only thing we want on our global scope is our gameBoard object. We need to make gameBoard a global variable so that all the JavaScript files in our program can access it. Let's explicitly put it on the window object.
   window.gameBoard = makeGameBoard(8);
 
   // You might be wondering where the makeGameBoard function came from and why we can just invoke it even though we haven't seen it declared in this file... this function was defined in the helperFunctions.js file and it was declared in the global scope, so it's accessible anywhere in our JavaScript code.
 
   // When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
-  console.log('our gameBoard is:', gameBoard);
+  console.log('our111111 gameBoard is:', gameBoard);
 
   // We've included the underscore.js library on the page, so feel free to use it throughout this project. 
 
