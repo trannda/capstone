@@ -10,7 +10,7 @@
 (function() {
 
   // Notice that we wrap all of our code in an IIFE (immediately invoked function expression). This is a common pattern that you'll see... can you guess why? If you need some help, try googling "avoid polluting global scope". 
-  // Since all of our code will be written inside the local scope of a function, you won't be able to just type a variable name directly in the console and see its value (remember, the console only has access to global scope variables). So, in order to see the values of the variables you declare you'll need to make use of console.log to print them to the console. Writing all your console.logs in your .js file here is a good pattern to get used to. 
+  // Since all of our code will be written inside the local scope of a function, you won't be able to just type a variable name directly in the console and see its value (remember, the console only has access to global scope variables). So, in order to see the values of the variables you declare you'll need to make use of console.log to print them to the console. f
   
   /// The only thing we want on our global scope is our gameBoard object. We need to make gameBoard a global variable so that all the JavaScript files in our program can access it. Let's explicitly put it on the window object.
   window.gameBoard = makeGameBoard(8);
@@ -18,30 +18,57 @@
   // You might be wondering where the makeGameBoard function came from and why we can just invoke it even though we haven't seen it declared in this file... this function was defined in the helperFunctions.js file and it was declared in the global scope, so it's accessible anywhere in our JavaScript code.
 
   // When in doubt, always console.log whatever it is you're working with to investigate it more. Try that now with gameBoard to figure it out!
-  console.log('our111111 gameBoard is:', gameBoard);
+  console.log('our gameBoard is:', gameBoard);
 
   // We've included the underscore.js library on the page, so feel free to use it throughout this project. 
 
   // gameBoard is an array of arrays (an array that is filled with other arrays). Let's start by using each to iterate through the gameBoard array, console.logging each item inside the gameBoard array. You should see 8 arrays, each of length 8, logged to your console. Each array here represents a row. 
 
+  /////use _.each iterate through gameBoard array
+  /////console.log gameBoard[i]
+
+_.each(gameBoard, function(element, i, array){
+  console.log(element);}
+  );
+
+
   // Ok, now that we see the gameBoard array contains 8 arrays representing the 8 rows in the board, let's investigate a single row. 
+
   // Let's use each again, this time invoking it with the first row in the gameBoard. Let's go through and console.log each item in that row. 
 
+_.each(gameBoard[0], function(element, i, array){
+  console.log(element);
+});
   // What you'll see is 8 different objects logged to your console. Click into them to explore them more. 
   // Each of these objects represents a square. We have many different pieces of information we want to store about each square: what color it is, what position it is on the board, what gamePiece is at that position, etc. An object is a perfect way to store information about all these different properties associated with that square. 
 
   // gameBoard[row][column] will get you the squareObj at that position in the gameBoard. So gameBoard[2][6] will point to the squareObj on row 3 column 7. Quick review on how this works: JS chains operators together, the results of each one being passed to the next operation. So first we're accessing the thing at index 2 in our gameBoard when we say gameBoard[2]. Then, within that thing (which is an array representing a row), we're asking for the item at the 6th index (which is going to be a squareObj). 
   // We could chain this together even more. Explain with your pair each individual operation that's going on when we say:
+
   gameBoard[3][5].color = 'black';
 
   // Alright! Now that we've figured out the gameBoard is an array of arrays, and that each square is just an object with some useful properties on it, let's start using our functional programming tools to make some changes to the board. 
   // Use each to iterate through the first row of the gameBoard (the array at position 0 in the gameBoard array). 
+
+
     // console.log each item that's passed into our callback. 
     // What is it that's being passed into each invocation of our callback? Can we name this parameter something obvious that makes it clear what it represents?
     // Let's change every square to a different color of your choosing. 
 
+
       // If you're not familiar with colors in JS, you can do this in three main ways: through rgb values, hex values (the way we've done it right now), or just typing in a color name like 'orange'.
         // Random aside: hex values are really useful if you're trying to create random colors :)
+
+  // 1st row of gameBoard
+  // change to random color at each square
+
+  _.each(gameBoard[0],function(squareObj, i, array) {
+    // console.log(squareObj);
+    // console.log(squareObj[0]);
+    squareObj.color = "pink";
+  });
+
+
     // Now let's do the same thing using map on the second row of our gameBoard.
       // First, create an array of 8 color strings. Mine would be ['orange','purple','orange','purple','orange','purple','orange','purple']
       // What's the key difference between map and each? map returns an array, whereas each only has side effects, and does not return anything. 
@@ -49,6 +76,12 @@
       // The key part here is how to leverage the fact that map returns an array of values to you. So what we're going to do in the end is overwrite the second row of the gameBoard with the mutated array map returns to us. 
       // Let's pseudocode!
         // map through an array of colors
+
+        ////////create and array of 8 color strings orange/purple for the 
+        //2nd row change to orange/purple 
+        // map returns a new modified array
+        //////////
+
         // remember that the callback function has to do three three things:
           // 1. Take in an item.
           // 2. Do something to change that item into what we want to see in the output array.
@@ -56,6 +89,7 @@
         // On each iteration of map
           // Take in a color
           // Change that color into a squareObj
+
             // Recall that each squareObj on our board looks like this: 
               // var square = {
               //     position: [row, column],
@@ -64,8 +98,15 @@
               //     text: ''
               // };
           // Return the squareObj
+
           // Set the second row of our gameBoard equal to what map returns to us. 
           // Remember, the key difference between map and each is that each purely has side effects, while map is designed to return a new array that is the same length as the old array. In order to use map properly, we must put this returned array to use. 
+
+          ////***** _.map(list, iterator)
+          _.map(gameBoard[1], )
+
+
+
 
     // Now that we've figured out how to use map and each to change the colors in a row, let's nest them inside of another each to change all of the rows!
       // Let's warm up to this by doing it the way we would have before we knew how to program functionally: using nested for loops. 
